@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+body{
+background-color: #120507;
+min-height: 100vh;
+font-family: 'MedievalSharp', cursive, serif;
+color: #e0e0e0;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0a0304;
+  padding: 1.2rem 2rem;
+  border-bottom: 2px solid #660000;
+  box-shadow: 0 4px 15px rgba(102, 0, 0, 0.4);
+}
+
+.logo {
+  color: #b30000;
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(179, 0, 0, 0.7);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links a {
+  color: #e0e0e0;
+  text-decoration: none;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #ff2a2a;
+  text-shadow: 0 0 8px #b30000;
+}
+
+.img-gotica {
+  width: 100%;            
+  max-width: 350px;         
+  height: auto;            
+  display: block;
+  border-radius: 10px;
+  border: 2px solid #4a0000;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.9);
+  margin: 1.5rem 0;
+  filter: grayscale(40%) brightness(80%);
+  transition: filter 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, transform 0.3s ease;
+}
+
+.img-gotica:hover {
+  filter: grayscale(0%) brightness(100%);
+  border-color: #cc0000;
+  box-shadow: 0 0 15px rgba(204, 0, 0, 0.6);
+  transform: scale(1.01);
+}
+
+
+.carrossel {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  gap: 1.5rem;
+  padding-bottom: 1rem;
+}
+
+
+.carrossel-item {
+  flex: 0 0 100%;
+  scroll-snap-align: center;
+  background-color: #0d0405;
+  border: 2px solid #4a0000;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
+.carrossel-item img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+  display: block;
+  filter: grayscale(30%) brightness(85%);
+  transition: filter 0.3s ease;
+}
+
+.carrossel-item:hover img {
+  filter: grayscale(0%) brightness(100%);
+}
+
+.legenda-carrossel {
+  padding: 0.8rem 1rem;
+  margin: 0;
+  text-align: center;
+  color: #c0c0c0;
+  font-size: 0.95rem;
+  background-color: #140507;
+  border-top: 1px solid #330000;
+}
+
+.carrossel::-webkit-scrollbar {
+  height: 8px;
+}
+
+.carrossel::-webkit-scrollbar-track {
+  background: #0a0304;
+  border-radius: 4px;
+}
+
+.carrossel::-webkit-scrollbar-thumb {
+  background: #660000;
+  border-radius: 4px;
+}
+
+.carrossel::-webkit-scrollbar-thumb:hover {
+  background: #cc0000;
+}
