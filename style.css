@@ -1,28 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
-body{
-background-color: #120507;
-min-height: 100vh;
-font-family: 'MedievalSharp', cursive, serif;
-color: #e0e0e0;
+
+body {
+  background-color: #120507;
+  min-height: 100vh;
+  font-family: 'MedievalSharp', cursive, serif;
+  color: #e0e0e0;
+  margin: 0;
 }
 
+/* Navbar com Logo + Texto alinhados à esquerda e Links à direita */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #0a0304;
-  padding: 1.2rem 2rem;
+  padding: 1rem 2rem;
   border-bottom: 2px solid #660000;
   box-shadow: 0 4px 15px rgba(102, 0, 0, 0.4);
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   color: #b30000;
   font-size: 1.8rem;
   font-weight: bold;
   letter-spacing: 2px;
   text-transform: uppercase;
   text-shadow: 0 0 10px rgba(179, 0, 0, 0.7);
+}
+
+.logo-header {
+  max-height: 45px;
+  width: auto;
 }
 
 .nav-links {
@@ -46,10 +57,115 @@ color: #e0e0e0;
   text-shadow: 0 0 8px #b30000;
 }
 
+/* Container do Formulário (Centralizado abaixo da Navbar) */
+.secao-formulario {
+  max-width: 600px;
+  margin: 2.5rem auto;
+  padding: 0 1rem;
+}
+
+.form-topo {
+  background: #121212;
+  color: #e0e0e0;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.form-topo h2 {
+  color: #ff4444;
+  margin-top: 0;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  font-size: 1.2rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 8px;
+}
+
+/* Estrutura interna em 2 Colunas */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.form-group label,
+.form-group-options label {
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+  color: #aaa;
+}
+
+.form-topo input[type="text"],
+.form-topo input[type="password"],
+.form-topo input[type="number"],
+.form-topo input[type="email"],
+.form-topo input[type="url"],
+.form-topo input[type="date"],
+.form-topo input[type="time"],
+.form-topo select,
+.form-topo textarea {
+  background: #222;
+  border: 1px solid #444;
+  color: #fff;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+
+.form-topo input[type="color"] {
+  height: 38px;
+  width: 100%;
+  border: 1px solid #444;
+  background: #222;
+  cursor: pointer;
+}
+
+.radio-group {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.form-group-checkbox {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.btn-submit {
+  width: 100%;
+  background: #b30000;
+  color: #fff;
+  border: none;
+  padding: 12px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background 0.2s;
+}
+
+.btn-submit:hover {
+  background: #ff0000;
+}
+
+/* Imagem e Carrossel */
 .img-gotica {
-  width: 100%;            
+  width: 100%;          
   max-width: 350px;         
-  height: auto;            
+  height: auto;           
   display: block;
   border-radius: 10px;
   border: 2px solid #4a0000;
@@ -66,7 +182,6 @@ color: #e0e0e0;
   transform: scale(1.01);
 }
 
-
 .carrossel {
   display: flex;
   overflow-x: auto;
@@ -76,7 +191,6 @@ color: #e0e0e0;
   padding-bottom: 1rem;
 }
 
-
 .carrossel-item {
   flex: 0 0 100%;
   scroll-snap-align: center;
@@ -85,7 +199,6 @@ color: #e0e0e0;
   border-radius: 10px;
   overflow: hidden;
 }
-
 
 .carrossel-item img {
   width: 100%;
@@ -126,4 +239,36 @@ color: #e0e0e0;
 
 .carrossel::-webkit-scrollbar-thumb:hover {
   background: #cc0000;
+}
+/* Botão sanfona */
+#btn-toggle-form {
+  width: 100%;
+  background: #121212;
+  color: #ff4444;
+  border: 1px solid #333;
+  padding: 12px 20px;
+  font-family: 'MedievalSharp', cursive, serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+#btn-toggle-form:hover {
+  border-color: #ff4444;
+  background: #1a0a0c;
+}
+
+/* Esconde o formulário */
+.form-topo.escondido {
+  display: none;
+}
+
+/* Remove a margem superior do form para colar no botão */
+.form-topo {
+  margin-top: 10px;
 }

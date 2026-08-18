@@ -1,26 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head> 
- 
- <meta charset= "UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Metal archives</title>
-<link rel="stylesheet" href="style.css">
+	<meta charset= "UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Metal archives</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js" defer></script>
 </head>
+	
 <body>
-	<header>
-		<img src= "Imagens/logotipo-do-site.png">
-	</header>
 	<nav class="navbar">
-		<div class="logo">Metal archives</div>
-		<ul class="nav-links">
-			<li><a href="#origem-do-genero">Origem do Gênero</a></li>
-			<li><a href="#a-estetica-e-o-som">A Estética e o Som</a></li>
-			<li><a href="#legado-e-evolucao">Legado e Evolução</a></li>
-			<li><a href="#curiosidades">Curiosidades</a></li>
-			<li><a href="#definicoes">Definições</a></li>
-		</ul>
-	</nav>
+  <!-- Imagem e texto alinhados lado a lado no canto esquerdo -->
+  <div class="logo">
+    <img src="Imagens/logotipo-do-site.png" alt="Logotipo" class="logo-header">
+    <span>Metal archives</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="#origem-do-genero">Origem do Gênero</a></li>
+    <li><a href="#a-estetica-e-o-som">A Estética e o Som</a></li>
+    <li><a href="#legado-e-evolucao">Legado e Evolução</a></li>
+    <li><a href="#curiosidades">Curiosidades</a></li>
+    <li><a href="#definicoes">Definições</a></li>
+  </ul>
+</nav>
+
+<!-- Formulário posicionado abaixo da barra de navegação -->
+<section class="secao-formulario">
+	<button type="button" id="btn-toggle-form">
+    Subscreva-se ao fórum <span id="icone-seta">▼</span>
+  </button>
+  <form action="#" class="form-topo escondido" >
+    <h2>Subscreva-se ao fórum</h2>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="fname">Nome:</label>
+        <input type="text" id="fname" name="fname" required>
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" name="senha" required>
+      </div>
+
+      <div class="form-group">
+        <label for="genre">Gênero Identificado:</label>
+        <select id="genre" name="genero_id" required>
+          <option value="feminino">Feminino</option>
+          <option value="masculino">Masculino</option>
+          <option value="outro">Outro</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="idade">Idade:</label>
+        <input type="number" id="idade" name="idade" min="18" max="100" step="1" required>
+      </div>
+
+      <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+      </div>
+
+      <div class="form-group">
+        <label for="site">Website:</label>
+        <input type="url" id="site" name="site" pattern="https://.*" placeholder="https://exemplo.com" required>
+      </div>
+
+      <div class="form-group">
+        <label for="show">Data do Show:</label>
+        <input type="date" id="show" name="show" min="2026-01-01" max="2026-12-31" required>
+      </div>
+
+      <div class="form-group">
+        <label for="horario">Horário:</label>
+        <input type="time" id="horario" name="horario" required>
+      </div>
+
+      <div class="form-group full-width">
+        <label for="cor-tema">Cor favorita:</label>
+        <input type="color" id="cor-tema" name="cor-tema" value="#ff0000">
+      </div>
+
+      <div class="form-group full-width">
+        <label for="mensagem">Mensagem:</label>
+        <textarea id="mensagem" name="mensagem" rows="3"></textarea>
+      </div>
+
+      <div class="form-group-options full-width">
+        <label>Gênero Musical Favorito:</label>
+        <div class="radio-group">
+          <label><input type="radio" name="genero_musical" value="heavy"> Heavy Metal</label>
+          <label><input type="radio" name="genero_musical" value="thrash"> Thrash Metal</label>
+          <label><input type="radio" name="genero_musical" value="outro"> Outro</label>
+        </div>
+      </div>
+
+      <div class="form-group-checkbox full-width">
+        <input type="checkbox" id="novidades" name="novidades" required>
+        <label for="novidades">Deseja receber novidades por e-mail?</label>
+      </div>
+
+      <div class="full-width">
+        <button type="submit" class="btn-submit">Cadastrar</button>
+      </div>
+    </div>
+  </form>
+</section>
 	<main class="container">
 		<section id="origem-do-genero" class="card-gotico">
 			<h2>Origem do Gênero</h2>
@@ -111,5 +198,6 @@
 	</main>
 	
 	<footer>    <p>© 2026 Meu Site. Todos os direitos reservados.</p> </footer>
+	
 </body>
 </html>
