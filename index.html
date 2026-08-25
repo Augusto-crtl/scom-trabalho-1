@@ -15,7 +15,7 @@
     <img src="Imagens/logotipo-do-site.png" alt="Logotipo" class="logo-header">
     <h1>Metal archives</h1>
   </div>
-
+  
   <ul class="nav-links">
     <li><a href="#origem-do-genero">Origem do Gênero</a></li>
     <li><a href="#a-estetica-e-o-som">A Estética e o Som</a></li>
@@ -25,11 +25,38 @@
   </ul>
 </nav>
 
+<!-- Banner de Contagem Regressiva -->
+<section class="banner-timer">
+  <div class="timer-container">
+    <span class="timer-tag">Próximo Evento</span>
+    <h3>Gothic Metal Fest 2026</h3>
+    <div id="countdown" class="countdown-grid">
+      <div class="time-box">
+        <span id="dias">00</span>
+        <small>Dias</small>
+      </div>
+      <div class="time-box">
+        <span id="horas">00</span>
+        <small>Horas</small>
+      </div>
+      <div class="time-box">
+        <span id="minutos">00</span>
+        <small>Min</small>
+      </div>
+      <div class="time-box">
+        <span id="segundos">00</span>
+        <small>Seg</small>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Formulário posicionado abaixo da barra de navegação -->
 <section class="secao-formulario">
 	<button type="button" id="btn-toggle-form">
     Subscreva-se ao fórum <span id="icone-seta">▼</span>
   </button>
+  <div id="status-membro" class="status-membro escondido"></div>
   <form action="#" class="form-topo escondido" >
     <h2>Subscreva-se ao fórum</h2>
 
@@ -40,9 +67,12 @@
       </div>
 
       <div class="form-group">
-        <label for="senha">Senha:</label>
-        <input type="password" id="senha" name="senha" required>
-      </div>
+		  <label for="senha">Senha:</label>
+		  <div class="input-senha-wrapper">
+			<input type="password" id="senha" name="senha" required>
+			<button type="button" id="btn-toggle-senha" aria-label="Mostrar ou ocultar senha">👁️</button>
+		  </div>
+	  </div>
 
       <div class="form-group">
         <label for="genre">Gênero Identificado:</label>
@@ -114,6 +144,7 @@
 			<h2>Origem do Gênero</h2>
 			<figure>
 				<img 
+					id="img-birmingham"
 					src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=800" 
 					alt="Fábricas industriais de Birmingham com atmosfera sombria" 
 					class="img-gotica"
