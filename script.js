@@ -61,8 +61,8 @@ function exibirStatusMembro(nome) {
     statusMembro.innerHTML = `<p>⚡ Status: <strong>Membro Ativo</strong> (${nome})</p>`;
     statusMembro.classList.remove('escondido');
 }
-
-// 1. Ao carregar a página: verifica se existem dados salvos no LocalStorage
+/*
+//Ao carregar a página: verifica se existem dados salvos no LocalStorage
 document.addEventListener('DOMContentLoaded', () => {
     const nomeSalvo = localStorage.getItem('metal_membro_nome');
     const corSalva = localStorage.getItem('metal_cor_tema');
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// 2. Ao submeter o formulário: grava as preferências do usuário no LocalStorage
+//Ao submeter o formulário: grava as preferências do usuário no LocalStorage
 if (formInscricao) {
     formInscricao.addEventListener('submit', (e) => {
         e.preventDefault(); // Impede o recarregamento da página
@@ -102,7 +102,7 @@ if (formInscricao) {
         }
     });
 }
-
+*/
 // Carrossel Automático
 const carrossel = document.querySelector('.carrossel');
 
@@ -190,5 +190,38 @@ if (imgBirmingham) {
         imgBirmingham.src = imgOriginal;
         imgBirmingham.alt = altOriginal;
         if (legendaBirmingham) legendaBirmingham.textContent = textoLegendaOriginal;
+    });
+}
+
+// Gerenciamento de Tooltips em JavaScript
+const termosTooltip = document.querySelectorAll('.tooltip-term');
+
+if (termosTooltip.length > 0) {
+    // Criar o elemento container do tooltip dinamicamente no DOM
+    const tooltipBox = document.createElement('div');
+    tooltipBox.classList.add('custom-tooltip');
+    document.body.appendChild(tooltipBox);
+
+    termosTooltip.forEach(termo => {
+        // Ao passar o mouse sobre o termo
+        termo.addEventListener('mouseenter', (e) => {
+            const texto = termo.getAttribute('data-tooltip');
+            if (!texto) return;
+
+            tooltipBox.textContent = texto;
+            tooltipBox.classList.add('visivel');
+        });
+
+        // Conforme o mouse se move dentro do termo, o tooltip acompanha
+        termo.addEventListener('mousemove', (e) => {
+            // Posiciona o balão 15px abaixo e à direita do cursor
+            tooltipBox.style.left = `${e.pageX + 15}px`;
+            tooltipBox.style.top = `${e.pageY + 15}px`;
+        });
+
+        // Ao retirar o mouse do termo
+        termo.addEventListener('mouseleave', () => {
+            tooltipBox.classList.remove('visivel');
+        });
     });
 }
