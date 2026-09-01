@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
 
+/* Reset global para cálculo correto de larguras */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --cor-destaque: #ff0000;
+}
+
 body {
   background-color: #120507;
   min-height: 100vh;
@@ -9,10 +18,10 @@ body {
   padding-top: 75px;
 }
 
-/* Navbar com Logo + Texto alinhados à esquerda e Links à direita */
+/* Navbar */
 .navbar {
   top: 0;
-  position:sticky;
+  position: sticky;
   z-index: 1000; 
   display: flex;
   justify-content: space-between;
@@ -21,16 +30,15 @@ body {
   padding: 1rem 2rem;
   border-bottom: 2px solid #660000;
   box-shadow: 0 4px 15px rgba(102, 0, 0, 0.4);
-  width: 96	%;
+  width: 100%;
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
-/* Estilo aplicado via JS quando o usuário rola a página */
-.navbar.navbar-scrolled {
-  background-color: #040102; /* Fundo ainda mais escuro */
-  border-bottom: 2px solid #ff0000; /* Borda vermelha viva */
-  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.6); /* Brilho vermelho mais intenso */
-}
 
+.navbar.navbar-scrolled {
+  background-color: #040102;
+  border-bottom: 2px solid #ff0000;
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.6);
+}
 
 .logo {
   display: flex;
@@ -47,7 +55,6 @@ body {
 .logo-header {
   max-height: 45px;
   width: auto;
-  
 }
 
 .nav-links {
@@ -71,11 +78,33 @@ body {
   text-shadow: 0 0 8px #b30000;
 }
 
-/* Container do Formulário (Centralizado abaixo da Navbar) */
+/* Container do Formulário */
 .secao-formulario {
-  max-width: 600px;
+  max-width: 650px;
   margin: 2.5rem auto;
   padding: 0 1rem;
+}
+
+#btn-toggle-form {
+  width: 100%;
+  background: #121212;
+  color: #ff4444;
+  border: 1px solid #333;
+  padding: 12px 20px;
+  font-family: 'MedievalSharp', cursive, serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+#btn-toggle-form:hover {
+  border-color: #ff4444;
+  background: #1a0a0c;
 }
 
 .form-topo {
@@ -85,6 +114,11 @@ body {
   border-radius: 8px;
   border: 1px solid #333;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  margin-top: 10px;
+}
+
+.form-topo.escondido {
+  display: none;
 }
 
 .form-topo h2 {
@@ -92,12 +126,31 @@ body {
   margin-top: 0;
   margin-bottom: 15px;
   text-transform: uppercase;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   border-bottom: 1px solid #333;
   padding-bottom: 8px;
+  text-align: center;
 }
 
-/* Estrutura interna em 2 Colunas */
+/* Estilização Gótica de Fieldset e Legend */
+.form-topo fieldset {
+  border: 1px solid #4a0000;
+  background: rgba(10, 3, 4, 0.6);
+  border-radius: 6px;
+  padding: 15px;
+  margin: 0 0 15px 0;
+}
+
+.form-topo legend {
+  color: #ff4444;
+  font-size: 0.95rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0 8px;
+}
+
+/* Grid de duas colunas dentro dos fieldsets */
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -120,6 +173,7 @@ body {
   color: #aaa;
 }
 
+/* Estilo para Entradas de Texto, Select e Áreas de Texto */
 .form-topo input[type="text"],
 .form-topo input[type="password"],
 .form-topo input[type="number"],
@@ -132,37 +186,82 @@ body {
   background: #222;
   border: 1px solid #444;
   color: #fff;
-  padding: 8px;
+  padding: 8px 10px;
   border-radius: 4px;
+  font-size: 0.9rem;
+  font-family: inherit;
+  width: 100%;
+}
+
+.form-topo input:focus,
+.form-topo select:focus,
+.form-topo textarea:focus {
+  outline: none;
+  border-color: #ff4444;
+  box-shadow: 0 0 5px rgba(255, 68, 68, 0.4);
+}
+
+/* Customização dos Inputs de Arquivo (Upload) */
+.form-topo input[type="file"] {
+  background: #1a0a0c;
+  border: 1px dashed #660000;
+  color: #ccc;
+  padding: 6px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  width: 100%;
+}
+
+.form-topo input[type="file"]::file-selector-button {
+  background: #4a0000;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-right: 10px;
+  transition: background 0.2s ease;
+}
+
+.form-topo input[type="file"]::file-selector-button:hover {
+  background: #ff0000;
+}
+
+/* Seletores de Radio e Checkbox */
+.radio-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 5px 0;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #e0e0e0;
+  cursor: pointer;
   font-size: 0.9rem;
 }
 
-.form-topo input[type="color"] {
-  height: 38px;
-  width: 100%;
-  border: 1px solid #444;
-  background: #222;
+.radio-group input[type="radio"],
+.form-group-checkbox input[type="checkbox"] {
+  accent-color: var(--cor-destaque, #ff0000);
   cursor: pointer;
-}
-
-.radio-group {
-  display: flex;
-  gap: 15px;
-  align-items: center;
+  width: 16px;
+  height: 16px;
 }
 
 .form-group-checkbox {
   display: flex;
   gap: 10px;
   align-items: center;
-  margin-top: 5px;
-}
-/* Variável global para customização dinâmica da cor de destaque */
-:root {
-  --cor-destaque: #ff0000;
+  margin: 10px 0;
 }
 
-/* Container do campo de senha com ícone relativo */
+/* Campo de Senha com Botão Relativo */
 .input-senha-wrapper {
   position: relative;
   display: flex;
@@ -171,12 +270,9 @@ body {
 }
 
 .input-senha-wrapper input {
-  width: 100%;
-  padding-right: 40px !important; /* Reservar espaço interno para o botão do olho */
-  box-sizing: border-box;
+  padding-right: 40px !important;
 }
 
-/* Botão de alternar senha */
 #btn-toggle-senha {
   position: absolute;
   right: 8px;
@@ -197,12 +293,7 @@ body {
   transform: scale(1.1);
 }
 
-#btn-toggle-senha:focus-visible {
-  outline: 1px solid var(--cor-destaque, #ff0000);
-  border-radius: 2px;
-}
-
-/* Selo de status de membro ativo recuperado do LocalStorage */
+/* Status e Botão de Envio */
 .status-membro {
   background: #1a080a;
   border: 1px solid var(--cor-destaque);
@@ -212,20 +303,10 @@ body {
   margin-top: 10px;
   text-align: center;
   box-shadow: 0 0 10px rgba(179, 0, 0, 0.3);
-  transition: border-color 0.3s ease;
 }
 
 .status-membro.escondido {
   display: none;
-}
-
-.status-membro p {
-  margin: 0;
-  font-size: 0.95rem;
-}
-
-.status-membro strong {
-  color: var(--cor-destaque);
 }
 
 .btn-submit {
@@ -234,25 +315,24 @@ body {
   color: #fff;
   border: none;
   padding: 12px;
+  font-family: inherit;
+  font-size: 1rem;
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
   transition: background 0.2s;
 }
 
 .btn-submit:hover {
-  background: #ff0000;
+  background: #cc0000;
 }
 
-#img-birmingham {
-  cursor: pointer;
-  transition: filter 0.4s ease, border-color 0.4s ease, transform 0.3s ease;
-}
-
-/* Imagem e Carrossel */
+/* Imagens, Banner e Tooltips */
 .img-gotica {
-  width: 100%;          
+  width: 100%;         
   max-width: 350px;         
   height: auto;           
   display: block;
@@ -312,57 +392,6 @@ body {
   border-top: 1px solid #330000;
 }
 
-.carrossel::-webkit-scrollbar {
-  height: 8px;
-}
-
-.carrossel::-webkit-scrollbar-track {
-  background: #0a0304;
-  border-radius: 4px;
-}
-
-.carrossel::-webkit-scrollbar-thumb {
-  background: #660000;
-  border-radius: 4px;
-}
-
-.carrossel::-webkit-scrollbar-thumb:hover {
-  background: #cc0000;
-}
-/* Botão sanfona */
-#btn-toggle-form {
-  width: 100%;
-  background: #121212;
-  color: #ff4444;
-  border: 1px solid #333;
-  padding: 12px 20px;
-  font-family: 'MedievalSharp', cursive, serif;
-  font-size: 1.2rem;
-  text-transform: uppercase;
-  cursor: pointer;
-  border-radius: 8px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: border-color 0.3s, background 0.3s;
-}
-
-#btn-toggle-form:hover {
-  border-color: #ff4444;
-  background: #1a0a0c;
-}
-
-/* Esconde o formulário */
-.form-topo.escondido {
-  display: none;
-}
-
-/* Remove a margem superior do form para colar no botão */
-.form-topo {
-  margin-top: 10px;
-}
-
-/* Banner de Contagem Regressiva */
 .banner-timer {
   background: linear-gradient(180deg, #0a0304 0%, #17070a 100%);
   border-bottom: 1px solid #4a0000;
@@ -382,7 +411,7 @@ body {
   letter-spacing: 2px;
 }
 
-.banner-timer h3 {
+.banner-timer h2 {
   margin: 5px 0 15px 0;
   color: #e0e0e0;
   font-size: 1.4rem;
@@ -419,28 +448,13 @@ body {
   text-transform: uppercase;
 }
 
-.evento-iniciado {
-  color: #ff4444;
-  font-size: 1.2rem;
-  font-weight: bold;
-  letter-spacing: 2px;
-}
-
-/* Destaque visual dos termos com tooltip no texto */
 .tooltip-term {
   color: var(--cor-destaque, #ff0000);
   border-bottom: 1px dashed var(--cor-destaque, #ff0000);
   cursor: help;
   font-weight: bold;
-  transition: color 0.2s ease, border-color 0.2s ease;
 }
 
-.tooltip-term:hover {
-  color: #ffffff;
-  border-bottom-style: solid;
-}
-
-/* Balão flutuante do tooltip gerado via JS */
 .custom-tooltip {
   position: absolute;
   z-index: 2000;
@@ -451,13 +465,24 @@ body {
   border-radius: 6px;
   font-size: 0.85rem;
   max-width: 250px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9), 0 0 8px rgba(179, 0, 0, 0.4);
-  pointer-events: none; /* Impede que o balão interfira nos movimentos do mouse */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease-in-out;
-  font-family: Arial, sans-serif; /* Fonte legível para o balão de texto */
+  font-family: Arial, sans-serif;
 }
 
 .custom-tooltip.visivel {
   opacity: 1;
+}
+
+/* Responsividade para telas menores */
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .full-width {
+    grid-column: span 1;
+  }
 }

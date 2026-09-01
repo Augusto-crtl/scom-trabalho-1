@@ -54,92 +54,132 @@
 
 <!-- Formulário posicionado abaixo da barra de navegação -->
 <section class="secao-formulario">
-	<button type="button" id="btn-toggle-form">
-    Subscreva-se ao fórum <span id="icone-seta">▼</span>
+  <button type="button" id="btn-toggle-form">
+    Junte-se ao fórum <span id="icone-seta">▼</span>
   </button>
   <div id="status-membro" class="status-membro escondido"></div>
-  <form action="#" class="form-topo escondido" >
+
+  <form action="#" id="form-cadastro" class="form-topo escondido" enctype="multipart/form-data">
     <h2>Subscreva-se ao fórum</h2>
 
-    <div class="form-grid">
-      <div class="form-group">
-        <label for="fname">Nome:</label>
-        <input type="text" id="fname" name="fname" required>
+    <!-- 1. Seleção do Perfil -->
+    <fieldset class="form-grupo-tipo full-width">
+      <legend>Tipo de Cadastro</legend>
+      <div class="radio-group">
+        <label>
+          <input type="radio" name="tipo_perfil" value="headbanger" checked>
+          ⚡ Sou Headbanger (Fã)
+        </label>
+        <label>
+          <input type="radio" name="tipo_perfil" value="banda">
+          🎸 Represento uma Banda
+        </label>
       </div>
+    </fieldset>
 
-      <div class="form-group">
-		  <label for="senha">Senha:</label>
-		  <div class="input-senha-wrapper">
-			<input type="password" id="senha" name="senha" required>
-			<button type="button" id="btn-toggle-senha" aria-label="Mostrar ou ocultar senha">👁️</button>
-		  </div>
-	  </div>
+    <!-- 2. Credenciais Básicas (Comum a todos) -->
+    <fieldset class="full-width">
+      <legend>Credenciais de Acesso</legend>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="fname">Nome / Apelido:</label>
+          <input type="text" id="fname" name="fname" required>
+        </div>
 
-      <div class="form-group">
-        <label for="genre">Gênero Identificado:</label>
-        <select id="genre" name="genero_id" required>
-		  <option value="" disabled selected hidden>Selecione uma opção</option>
-          <option value="feminino">Feminino</option>
-          <option value="masculino">Masculino</option>
-          <option value="outro">Outro</option>
-        </select>
-      </div>
+        <div class="form-group">
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+        </div>
 
-      <div class="form-group">
-        <label for="idade">Idade:</label>
-        <input type="number" id="idade" name="idade" min="18" max="100" step="1" required>
-      </div>
+        <div class="form-group">
+          <label for="senha">Senha:</label>
+          <div class="input-senha-wrapper">
+            <input type="password" id="senha" name="senha" required>
+            <button type="button" id="btn-toggle-senha" aria-label="Mostrar ou ocultar senha">👁️</button>
+          </div>
+        </div>
 
-      <div class="form-group">
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-      </div>
-
-      <div class="form-group">
-        <label for="site">Website:</label>
-        <input type="url" id="site" name="site" pattern="https://.*" placeholder="https://exemplo.com" required>
-      </div>
-
-      <div class="form-group">
-        <label for="show">Data do Show:</label>
-        <input type="date" id="show" name="show" min="2026-01-01" max="2026-12-31" required>
-      </div>
-
-      <div class="form-group">
-        <label for="horario">Horário:</label>
-        <input type="time" id="horario" name="horario" required>
-      </div>
-
-      <div class="form-group full-width">
-        <label for="cor-tema">Cor favorita:</label>
-        <input type="color" id="cor-tema" name="cor-tema" value="#ff0000">
-      </div>
-
-      <div class="form-group full-width">
-        <label for="mensagem">Mensagem:</label>
-        <textarea id="mensagem" name="mensagem" rows="3"></textarea>
-      </div>
-
-      <div class="form-group-options full-width">
-        <label>Gênero Musical Favorito:</label>
-        <div class="radio-group">
-          <label><input type="radio" name="genero_musical" value="heavy"> Heavy Metal</label>
-          <label><input type="radio" name="genero_musical" value="thrash"> Thrash Metal</label>
-          <label><input type="radio" name="genero_musical" value="outro"> Outro</label>
+        <div class="form-group">
+          <label for="genre">Gênero Identificado:</label>
+          <select id="genre" name="genero_id" required>
+            <option value="" disabled selected hidden>Selecione uma opção</option>
+            <option value="feminino">Feminino</option>
+            <option value="masculino">Masculino</option>
+            <option value="outro">Outro</option>
+          </select>
         </div>
       </div>
+    </fieldset>
 
-      <div class="form-group-checkbox full-width">
-        <input type="checkbox" id="novidades" name="novidades" required>
-        <label for="novidades">Deseja receber novidades por e-mail?</label>
+    <!-- 3. Preferências do Fã (Exibido por padrão) -->
+    <fieldset id="campos-headbanger" class="full-width">
+      <legend>Preferências Musicais</legend>
+      <div class="form-grid">
+        <div class="form-group full-width">
+          <label for="banda-favorita">Banda Favorita de Todos os Tempos:</label>
+          <input type="text" id="banda-favorita" name="banda_favorita" placeholder="Ex: Black Sabbath">
+        </div>
       </div>
+    </fieldset>
 
-      <div class="full-width">
-        <button type="submit" class="btn-submit">Cadastrar</button>
+    <!-- 4. Dados e Uploads da Banda (Inicialmente Oculto via JS) -->
+    <fieldset id="campos-banda" class="full-width escondido">
+      <legend>Informações e Mídia da Banda</legend>
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="nome-banda">Nome da Banda:</label>
+          <input type="text" id="nome-banda" name="nome_banda">
+        </div>
+
+        <div class="form-group">
+          <label for="subgenero-banda">Subgênero Dominante:</label>
+          <select id="subgenero-banda" name="subgenero_banda">
+            <option value="gothic">Gothic Metal</option>
+            <option value="doom">Doom Metal</option>
+            <option value="thrash">Thrash Metal</option>
+            <option value="heavy">Heavy Metal</option>
+          </select>
+        </div>
+
+        <div class="form-group full-width">
+          <label for="link-media">Link Principal (Spotify / Bandcamp / YouTube):</label>
+          <input type="url" id="link-media" name="link_media" placeholder="https://">
+        </div>
+
+        <div class="form-group">
+          <label for="logo-banda">Logotipo / Foto (PNG, JPG):</label>
+          <input type="file" id="logo-banda" name="logo_banda" accept="image/png, image/jpeg, image/webp">
+        </div>
+
+        <div class="form-group">
+          <label for="demo-banda">Música Demo (MP3 / WAV):</label>
+          <input type="file" id="demo-banda" name="demo_banda" accept="audio/mpeg, audio/wav, audio/ogg">
+        </div>
+
+        <div class="form-group full-width">
+          <label for="presskit-banda">Release / Presskit (PDF):</label>
+          <input type="file" id="presskit-banda" name="presskit_banda" accept="application/pdf">
+        </div>
       </div>
+    </fieldset>
+
+    <!-- 5. Finalização -->
+    <div class="form-group-checkbox full-width">
+      <input type="checkbox" id="novidades" name="novidades">
+      <label for="novidades">Deseja receber novidades por e-mail?</label>
+    </div>
+
+    <div class="full-width">
+      <button type="submit" class="btn-submit">Concluir Cadastramento</button>
     </div>
   </form>
 </section>
+
+<main class="container">
+  <article id="origem-do-genero" class="card-gotico">
+
+
+<!--Inicio dos textos -->
 	<main class="container">
 		<article id="origem-do-genero" class="card-gotico">
 			<h2>Origem do Gênero</h2>
@@ -183,7 +223,7 @@
 			  </li>
 			  <li>
 				<h3>A Origem do Sinal dos Chifres (Maloik)</h3>
-				<p>Já o famoso gesto com os dedos em formato de chifres, símbolo indiscutível dos fãs de Metal pelo mundo, foi popularizado por Ronnie James Dio ao assumir os vocais do Black Sabbath em 1979. Buscando uma marca registrada para se comunicar com o público sem repetir a clássica saudação de paz e amor de Ozzy Osbourne, Dio adaptou o <span class="tooltip-term" data-tooltip="Antigo gesto de superstição italiano usado originalmente para afastar o mau-olhado e energias negativas.">maloik</span> — um gesto da cultura popular italiana que sua avó usava para afastar o mau-olhado. A partir dali, a saudação se espalhou pelas plateias e virou a marca registrada da cultura headbanger.</p>
+				<p>Já o famoso gesto com os dedos em formato de chifres, símbolo indiscutível dos fãs de Metal pelo mundo, foi popularizado por Ronnie James Dio ao assumir os vocais do Black Sabbath em 1979. Buscando uma marca registrada para se comunicar com o público sem repetir a clássica saudação de paz e amor de Ozzy Osbourne, Dio apropriou-se do <span class="tooltip-term" data-tooltip="Antigo gesto de superstição italiano usado originalmente para afastar o mau-olhado e energias negativas.">maloik</span>. A partir dali, a saudação se espalhou pelas plateias e virou a marca registrada da cultura headbanger.</p>
 			  </li>
 			  <li>
 				<h3>Finlândia: A Capital Mundial do Metal</h3>
