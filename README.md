@@ -5,4 +5,5 @@ Projeto de interface web desenvolvido para a disciplina SCOM sobre a história e
 
 ## Como Executar
 1. Clone ou baixe este repositório.
-2. Abra o arquivo `index.html` em qualquer navegador moderno (Google Chrome, Mozilla Firefox ou Microsoft Edge).
+2. Crie uma pasta somente para as imagens e nomeie como "Imagens".
+3. Abra o arquivo `index.html` em qualquer navegador moderno (Google Chrome, Mozilla Firefox ou Microsoft Edge).
