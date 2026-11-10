@@ -358,6 +358,7 @@ footer {
 
 /* 3. Breakpoint Unificado (Ativa de 0px até 850px) */
 @media (max-width: 850px) {
+
   .navbar {
     flex-direction: column;
     padding: 0.6rem 0.8rem;
@@ -413,4 +414,64 @@ footer {
     align-items: flex-start;
     gap: 8px;
   }
+  
+}
+/* Regra estrita para ocultar elementos com a classe escondido */
+.escondido {
+  display: none !important;
+}
+
+/* Estilização do Contêiner de Abas */
+.aba-container {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--cor-borda);
+  padding-bottom: 10px;
+}
+
+/* Botões de Aba */
+.aba-btn {
+  flex: 1;
+  padding: 10px 15px;
+  background: #1a0a0c;
+  color: var(--cor-texto);
+  border: 1px solid #333;
+  border-radius: 6px;
+  font-family: var(--fonte-principal);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.aba-btn:hover {
+  border-color: #ff4444;
+  color: #fff;
+}
+
+.aba-btn.ativa {
+  background: var(--cor-destaque);
+  color: #fff;
+  border-color: var(--cor-destaque);
+  font-weight: bold;
+}
+
+/* Estilo do Painel de Usuário Autenticado */
+.status-membro {
+  background: var(--cor-fundo-card);
+  border: 1px solid var(--cor-borda);
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.btn-logout-estilo {
+  background: #4a0000 !important;
+  margin-top: 10px;
+}
+
+.btn-logout-estilo:hover {
+  background: #770000 !important;
 }

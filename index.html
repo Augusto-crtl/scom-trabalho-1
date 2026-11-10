@@ -35,7 +35,7 @@
 <aside class="banner-timer">
   <div class="timer-container">
     <span class="timer-tag">Próximo Evento</span>
-    <h2>Gothic Metal Fest 2026</h2>
+    <h2>Bangers Open Air 2027</h2>
     <div id="countdown" class="countdown-grid">
       <div class="time-box">
         <span id="dias">00</span>
@@ -56,132 +56,194 @@
     </div>
   </div>
 </aside>
-
-<!-- Formulário posicionado abaixo da barra de navegação -->
+<!-- Seção do Formulário de Autenticação / Membro -->
 <section class="secao-formulario">
   <button type="button" id="btn-toggle-form">
-    Junte-se ao fórum <span id="icone-seta">▼</span>
+    Área do Membro / Entrar <span id="icone-seta">▼</span>
   </button>
-  <div id="status-membro" class="status-membro escondido"></div>
+  
+  <!-- Painel de Usuário Autenticado -->
+<div id="status-membro" class="status-membro escondido">
+  <p>⚡ Bem-vindo, <strong id="nome-usuario-logado">Usuário</strong> (<span id="perfil-usuario-logado">FÃ</span>)</p>
+  
+  <!-- Botão visível apenas para perfil BANDA -->
+  <button type="button" id="btn-editar-minha-banda" class="btn-submit escondido" style="background:#b30000; margin-top:8px;">
+    🎸 Editar Página da Minha Banda
+  </button>
+  
+  <button type="button" id="btn-logout" class="btn-submit btn-logout-estilo">Sair / Logout</button>
+</div>
 
-  <form action="#" id="form-cadastro" class="form-topo escondido" enctype="multipart/form-data">
-    <h2>Subscreva-se ao fórum</h2>
+<!-- Modal/Formulário de Edição da Banda (Oculto por padrão) -->
+<div id="container-edicao-banda" class="form-topo escondido">
+  <h2>Painel da Banda - Editar Página</h2>
+  <form id="form-editar-banda">
+    <div class="form-group" style="margin-bottom: 12px;">
+      <label for="edit-nome-banda">Nome da Banda:</label>
+      <input type="text" id="edit-nome-banda" name="nome_banda" required>
+    </div>
 
-    <!-- 1. Seleção do Perfil -->
-    <fieldset class="form-grupo-tipo full-width">
-      <legend>Tipo de Cadastro</legend>
-      <div class="radio-group">
-        <label>
-          <input type="radio" name="tipo_perfil" value="headbanger" checked>
-          ⚡ Sou Headbanger (Fã)
-        </label>
-        <label>
-          <input type="radio" name="tipo_perfil" value="banda">
-          🎸 Represento uma Banda
-        </label>
+    <div class="form-group" style="margin-bottom: 12px;">
+      <label for="edit-subgenero-banda">Subgênero Dominante:</label>
+      <select id="edit-subgenero-banda" name="subgenero_banda">
+        <option value="gothic">Gothic Metal</option>
+        <option value="doom">Doom Metal</option>
+        <option value="thrash">Thrash Metal</option>
+        <option value="heavy">Heavy Metal</option>
+      </select>
+    </div>
+
+    <div class="form-group" style="margin-bottom: 12px;">
+      <label for="edit-link-media">Link Principal (Spotify / Bandcamp / YouTube):</label>
+      <input type="url" id="edit-link-media" name="link_media" placeholder="https://">
+    </div>
+
+    <div class="form-group" style="margin-bottom: 15px;">
+      <label for="edit-biografia">Biografia / Descrição da Banda:</label>
+      <textarea id="edit-biografia" name="biografia" rows="4" style="background:#222; border:1px solid #444; color:#fff; width:100%; padding:8px;" placeholder="Conte a história da sua banda..."></textarea>
+    </div>
+
+    <button type="submit" class="btn-submit">Salvar Alterações da Página</button>
+  </form>
+</div>
+
+  <!-- Container dos Formulários -->
+  <div id="container-auth-forms" class="form-topo escondido">
+    
+    <!-- Abas para alternar entre Login e Cadastro -->
+    <div class="aba-container">
+      <button type="button" id="aba-login" class="aba-btn ativa">Entrar (Login)</button>
+      <button type="button" id="aba-cadastro" class="aba-btn">Criar Conta</button>
+    </div>
+
+    <!-- 1. FORMULÁRIO DE LOGIN -->
+    <form id="form-login" class="form-auth">
+      <h2>Acessar Fórum</h2>
+      <div class="form-group" style="margin-bottom: 12px;">
+        <label for="login-email">E-mail:</label>
+        <input type="email" id="login-email" name="email" required>
       </div>
-    </fieldset>
+      <div class="form-group" style="margin-bottom: 15px;">
+        <label for="login-senha">Senha:</label>
+        <input type="password" id="login-senha" name="senha" required>
+      </div>
+      <button type="submit" class="btn-submit">Entrar</button>
+    </form>
 
-    <!-- 2. Credenciais Básicas (Comum a todos) -->
-    <fieldset class="full-width">
-      <legend>Credenciais de Acesso</legend>
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="fname">Nome / Apelido:</label>
-          <input type="text" id="fname" name="fname" required>
+    <!-- 2. FORMULÁRIO DE CADASTRO (Inicialmente Oculto via classe 'escondido') -->
+    <form id="form-cadastro" class="form-auth escondido" enctype="multipart/form-data">
+      <h2>Subscreva-se ao fórum</h2>
+
+      <!-- Seleção do Perfil -->
+      <fieldset class="form-grupo-tipo full-width">
+        <legend>Tipo de Cadastro</legend>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="tipo_perfil" value="headbanger" checked>
+            ⚡ Sou Headbanger (Fã)
+          </label>
+          <label>
+            <input type="radio" name="tipo_perfil" value="banda">
+            🎸 Represento uma Banda
+          </label>
         </div>
+      </fieldset>
 
-        <div class="form-group">
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
-        </div>
+      <!-- Credenciais Básicas -->
+      <fieldset class="full-width">
+        <legend>Credenciais de Acesso</legend>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="fname">Nome / Apelido:</label>
+            <input type="text" id="fname" name="fname" required>
+          </div>
 
-        <div class="form-group">
-          <label for="senha">Senha:</label>
-          <div class="input-senha-wrapper">
-            <input type="password" id="senha" name="senha" required>
-            <button type="button" id="btn-toggle-senha" aria-label="Mostrar ou ocultar senha">👁️</button>
+          <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="senha">Senha:</label>
+            <div class="input-senha-wrapper">
+              <input type="password" id="senha" name="senha" required>
+              <button type="button" id="btn-toggle-senha" aria-label="Mostrar ou ocultar senha">👁️</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="genre">Gênero Identificado:</label>
+            <select id="genre" name="genero_id" required>
+              <option value="" disabled selected hidden>Selecione uma opção</option>
+              <option value="feminino">Feminino</option>
+              <option value="masculino">Masculino</option>
+              <option value="outro">Outro</option>
+            </select>
           </div>
         </div>
+      </fieldset>
 
-        <div class="form-group">
-          <label for="genre">Gênero Identificado:</label>
-          <select id="genre" name="genero_id" required>
-            <option value="" disabled selected hidden>Selecione uma opção</option>
-            <option value="feminino">Feminino</option>
-            <option value="masculino">Masculino</option>
-            <option value="outro">Outro</option>
-          </select>
+      <!-- Preferências do Fã (Exibido por padrão) -->
+      <fieldset id="campos-headbanger" class="full-width">
+        <legend>Preferências Musicais</legend>
+        <div class="form-grid">
+          <div class="form-group full-width">
+            <label for="banda-favorita">Banda Favorita de Todos os Tempos:</label>
+            <input type="text" id="banda-favorita" name="banda_favorita" placeholder="Ex: Black Sabbath">
+          </div>
         </div>
+      </fieldset>
+
+      <!-- Dados da Banda (Inicialmente Oculto via classe 'escondido') -->
+      <fieldset id="campos-banda" class="full-width escondido">
+        <legend>Informações e Mídia da Banda</legend>
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="nome-banda">Nome da Banda:</label>
+            <input type="text" id="nome-banda" name="nome_banda">
+          </div>
+
+          <div class="form-group">
+            <label for="subgenero-banda">Subgênero Dominante:</label>
+            <select id="subgenero-banda" name="subgenero_banda">
+              <option value="gothic">Gothic Metal</option>
+              <option value="doom">Doom Metal</option>
+              <option value="thrash">Thrash Metal</option>
+              <option value="heavy">Heavy Metal</option>
+            </select>
+          </div>
+
+          <div class="form-group full-width">
+            <label for="link-media">Link Principal (Spotify / Bandcamp / YouTube):</label>
+            <input type="url" id="link-media" name="link_media" placeholder="https://">
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- Finalização -->
+      <div class="form-group-checkbox full-width" style="margin: 10px 0;">
+        <input type="checkbox" id="novidades" name="novidades">
+        <label for="novidades">Deseja receber novidades por e-mail?</label>
       </div>
-    </fieldset>
 
-    <!-- 3. Preferências do Fã (Exibido por padrão) -->
-    <fieldset id="campos-headbanger" class="full-width">
-      <legend>Preferências Musicais</legend>
-      <div class="form-grid">
-        <div class="form-group full-width">
-          <label for="banda-favorita">Banda Favorita de Todos os Tempos:</label>
-          <input type="text" id="banda-favorita" name="banda_favorita" placeholder="Ex: Black Sabbath">
-        </div>
+      <div class="full-width">
+        <button type="submit" class="btn-submit">Concluir Cadastramento</button>
       </div>
-    </fieldset>
-
-    <!-- 4. Dados e Uploads da Banda (Inicialmente Oculto via JS) -->
-    <fieldset id="campos-banda" class="full-width escondido">
-      <legend>Informações e Mídia da Banda</legend>
-      <div class="form-grid">
-        <div class="form-group">
-          <label for="nome-banda">Nome da Banda:</label>
-          <input type="text" id="nome-banda" name="nome_banda">
-        </div>
-
-        <div class="form-group">
-          <label for="subgenero-banda">Subgênero Dominante:</label>
-          <select id="subgenero-banda" name="subgenero_banda">
-            <option value="gothic">Gothic Metal</option>
-            <option value="doom">Doom Metal</option>
-            <option value="thrash">Thrash Metal</option>
-            <option value="heavy">Heavy Metal</option>
-          </select>
-        </div>
-
-        <div class="form-group full-width">
-          <label for="link-media">Link Principal (Spotify / Bandcamp / YouTube):</label>
-          <input type="url" id="link-media" name="link_media" placeholder="https://">
-        </div>
-
-        <div class="form-group">
-          <label for="logo-banda">Logotipo / Foto (PNG, JPG):</label>
-          <input type="file" id="logo-banda" name="logo_banda" accept="image/png, image/jpeg, image/webp">
-        </div>
-
-        <div class="form-group">
-          <label for="demo-banda">Música Demo (MP3 / WAV):</label>
-          <input type="file" id="demo-banda" name="demo_banda" accept="audio/mpeg, audio/wav, audio/ogg">
-        </div>
-
-        <div class="form-group full-width">
-          <label for="presskit-banda">Release / Presskit (PDF):</label>
-          <input type="file" id="presskit-banda" name="presskit_banda" accept="application/pdf">
-        </div>
-      </div>
-    </fieldset>
-
-    <!-- 5. Finalização -->
-    <div class="form-group-checkbox full-width">
-      <input type="checkbox" id="novidades" name="novidades">
-      <label for="novidades">Deseja receber novidades por e-mail?</label>
-    </div>
-
-    <div class="full-width">
-      <button type="submit" class="btn-submit">Concluir Cadastramento</button>
-    </div>
-  </form>
+    </form>
+  </div>
 </section>
 
 <!--Inicio dos textos -->
 	<main class="container">
+		<!-- Seção Pública: Bandas do Fórum -->
+		<article id="secao-bandas-cadastradas" class="card-gotico">
+		  <h2>Bandas da Aliança</h2>
+		  <p>Conheça as bandas independentes registradas no fórum:</p>
+		  <div id="grid-bandas" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin-top: 15px;">
+		<!-- As cartas das bandas serão renderizadas dinamicamente via JS -->
+		  </div>
+		</article>
+		
 		<article id="origem-do-genero" class="card-gotico">
 			<h2>Origem do Gênero</h2>
 			<figure>
@@ -192,7 +254,7 @@
 					class="img-gotica"
 					
 				 >
-				<figcaption>Paisagem industrial de Birmingham na década de 1960.</figcaption>
+				<figcaption id="legenda-birmingham">Paisagem industrial de Birmingham na década de 1960.</figcaption>
 			</figure>
 			<p>O <strong><em>Heavy Metal</em></strong> nasceu no final da década de 1960 nas áreas industriais da Inglaterra, impulsionado pelo som pesado de bandas que queriam refletir a realidade dura das fábricas. Foi em <strong>Birmingham</strong> que o grupo <strong><em>Black Sabbath</em></strong> revolucionou a música ao sintonizar suas guitarras em tons mais graves, criando uma atmosfera sombria nunca antes ouvida. O lançamento do álbum <strong><em>Black Sabbath</em></strong> em 1970 marcou oficialmente o nascimento de um movimento cultural que arrastaria multidões ao redor do planeta nas décadas seguintes.</p>
 		</article>
