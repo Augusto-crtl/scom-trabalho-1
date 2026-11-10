@@ -4,7 +4,7 @@ Plataforma web para a comunidade Heavy Metal desenvolvida para a disciplina de S
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 * **Frontend:** HTML5, CSS3 (design gótico e responsivo), JavaScript ES6+ (assíncrono com `fetch` API).
 * **Backend:** PHP 8+ utilizando a extensão PDO.
@@ -13,7 +13,7 @@ Plataforma web para a comunidade Heavy Metal desenvolvida para a disciplina de S
 
 ---
 
-## 📁 Arquitetura do Projeto
+##  Arquitetura do Projeto
 
 O projeto adota uma estrutura em camadas simples para separar a interface gráfica, as rotas da API RESTful e a conexão com o banco de dados:
 
@@ -52,7 +52,7 @@ metal-archives/
 
 ---
 
-## 🚀 Como Executar Localmente
+##  Como Executar Localmente
 
 ### 1. Pré-requisitos
 * **XAMPP** (ou servidor Apache + MySQL equivalente) com suporte a **PHP 8.0** ou superior.
@@ -84,7 +84,7 @@ Com o servidor XAMPP ativo, abra o navegador e acesse:
 
 ---
 
-## 🧪 Testes Automatizados
+##  Testes Automatizados
 
 A aplicação inclui uma suíte de testes automatizados desenvolvida em PHP para validar os endpoints e as regras de negócio pela linha de comando.
 
@@ -108,7 +108,7 @@ A aplicação inclui uma suíte de testes automatizados desenvolvida em PHP para
 
 ---
 
-## 🔒 Segurança Implementada
+##  Segurança Implementada
 
 * **Prepared Statements (PDO):** 100% das consultas ao banco de dados utilizam binds parametrizados para impedir vulnerabilidades de SQL Injection.
 * **Sanitização contra XSS:** Todas as variáveis e dados inseridos dinamicamente na página passam por tratamento de escape de entidades HTML (`escapeHTML()`).
