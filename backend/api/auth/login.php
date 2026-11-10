@@ -13,11 +13,14 @@ try {
     require_once '../../config/database.php';
     require_once '../../config/rate_limit.php';
 
-    $ipCliente = $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
-    verificarRateLimit($pdo, $ipCliente);
+    // Obtém o IP considerando proxies configurados
+    $ipCliente = $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? '127.0.0.1';
+    if (strpos($ipCliente, ',') !== false) {
+        $ipCliente = trim(explode(',', $ipCliente)[0]);
+    }
 
     $json = file_get_contents('php://input');
-    $dados = json_decode($json, true);
+    $dados = json_decode($json, true) ?? [];
 
     $email = trim($dados['email'] ?? '');
     $senha = trim($dados['senha'] ?? '');
@@ -28,22 +31,35 @@ try {
         exit;
     }
 
+    // 1. RATE LIMIT: Checa por IP + E-mail e interrompe com HTTP 429 se bloqueado
+    if (!verificarRateLimit($pdo, $ipCliente, $email)) {
+        http_response_code(429);
+        echo json_encode(["status" => 429, "erro" => "Muitas tentativas de login. Tente novamente mais tarde."]);
+        exit;
+    }
+
     $stmt = $pdo->prepare('SELECT * FROM usuarios WHERE email = ?');
     $stmt->execute([$email]);
     $usuario = $stmt->fetch();
 
-    // Busca o hash correto independente do nome da coluna (senha_hash ou senha)
     $hashNoBanco = $usuario['senha_hash'] ?? $usuario['senha'] ?? '';
+    
+    // Hash Falso fixo para evitar Timing Attack quando o e-mail não existir
+    $dummyHash = '$2y$10$abcdefghijklmnopqrstuuOU2N38k3ABy8Uve/w2I69Iq3z913/S6'; 
+    $hashParaValidar = !empty($hashNoBanco) ? $hashNoBanco : $dummyHash;
 
-    if ($usuario && !empty($hashNoBanco) && password_verify($senha, $hashNoBanco)) {
-        // Renova o ID da sessão para prevenir Session Fixation
+    $senhaValida = password_verify($senha, $hashParaValidar);
+
+    if ($usuario && $senhaValida) {
         session_regenerate_id(true);
 
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['usuario_nome'] = $usuario['nome'];
         $_SESSION['perfil'] = $usuario['perfil'];
 
-        // Log de sucesso
+        // Reseta as tentativas com falha em caso de sucesso
+        resetarTentativas($pdo, $ipCliente, $email);
+
         $stmtLog = $pdo->prepare('INSERT INTO logs_sistema (nivel, evento, mensagem, ip) VALUES (?, ?, ?, ?)');
         $stmtLog->execute(['INFO', 'LOGIN_SUCESSO', "Usuário ID {$usuario['id']} logou com sucesso.", $ipCliente]);
 
@@ -58,7 +74,9 @@ try {
             ]
         ]);
     } else {
-        // Destruição de sessões residuais em caso de falha
+        // Registra a falha no banco de dados imediatamente
+        registrarFalhaLogin($pdo, $ipCliente, $email);
+
         $_SESSION = array();
         if (ini_get("session.use_cookies")) {
             $params = session_get_cookie_params();
@@ -69,7 +87,6 @@ try {
         }
         session_destroy();
 
-        // Log de falha para o Rate Limiting
         $stmtLog = $pdo->prepare('INSERT INTO logs_sistema (nivel, evento, mensagem, ip) VALUES (?, ?, ?, ?)');
         $stmtLog->execute(['WARN', 'FALHA_AUTENTICACAO', "Tentativa de login falhou para o email: {$email}", $ipCliente]);
 
