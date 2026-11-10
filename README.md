@@ -1,6 +1,6 @@
 # Metal Archives - Trabalho Individual II (SCOM)
 
-Plataforma web para a comunidade Heavy Metal desenvolvida para a disciplina de Sistemas Corporativos e Mídia (SCOM). O projeto evoluiu da interface estática (Trabalho I) para uma aplicação cliente-servidor completa com backend em PHP, persistência em MySQL, autenticação por sessão, controle de acesso por perfis (RBAC), logs de auditoria e testes automatizados.
+Plataforma web para a comunidade Heavy Metal desenvolvida para a disciplina de Sistemas Computacionais (SCOM). O projeto evoluiu da interface estática (Trabalho I) para uma aplicação cliente-servidor completa com backend em PHP, persistência em MySQL, autenticação por sessão, controle de acesso por perfis (RBAC), logs de auditoria e testes automatizados.
 
 ---
 
